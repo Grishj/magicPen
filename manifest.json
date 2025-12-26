@@ -1,0 +1,84 @@
+{
+  "manifest_version": 3,
+  "name": "Magic Pen - Screen Annotation",
+  "version": "1.0.0",
+  "description": "Draw, highlight, and annotate on any webpage with pen, shapes, and highlighter tools.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.svg",
+      "48": "icons/icon48.svg",
+      "128": "icons/icon128.svg"
+    },
+    "default_title": "Magic Pen"
+  },
+  "icons": {
+    "16": "icons/icon16.svg",
+    "48": "icons/icon48.svg",
+    "128": "icons/icon128.svg"
+  },
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/canvas.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "commands": {
+    "toggle-drawing": {
+      "suggested_key": {
+        "default": "Alt+D",
+        "mac": "Alt+D"
+      },
+      "description": "Toggle drawing mode"
+    },
+    "select-pen": {
+      "suggested_key": {
+        "default": "Alt+P"
+      },
+      "description": "Select Pen tool"
+    },
+    "select-eraser": {
+      "suggested_key": {
+        "default": "Alt+E"
+      },
+      "description": "Select Eraser tool"
+    },
+    "undo-stroke": {
+      "suggested_key": {
+        "default": "Alt+Z"
+      },
+      "description": "Undo last stroke"
+    }
+  },
+  "options_page": "settings/settings.html",
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*",
+        "content/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}
